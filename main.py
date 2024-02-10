@@ -1,3 +1,5 @@
+import sys
+
 import RPi.GPIO as GPIO
 import time
 import atexit
@@ -125,6 +127,7 @@ def main():
 
 
 
+
             # Apri la valvola
             apri_valvola()
 
@@ -153,12 +156,12 @@ def main():
 
             # Pulisci i GPIO alla fine del ciclo settimanale
             GPIO.cleanup()
+            loggingR.error("CYCLE TEMRINATED ")
 
-
-
-    except KeyboardInterrupt:
-        pass  # Non fare nulla in caso di KeyboardInterrupt
-
+    except Exception as e:
+        loggingR.error("ERRORE: %s", str(e))
+        GPIO.cleanup()
+        sys.exit()
 
 
 if __name__ == "__main__":
