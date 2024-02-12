@@ -177,7 +177,7 @@ def main():
             GPIO.cleanup()
             loggingR.error("CYCLE TEMRINATED ")
             print("fine ciclo")
-            time.sleep(10)
+            time.sleep(20)
 
     except Exception as e:
         loggingR.error("ERRORE: %s", str(e))
