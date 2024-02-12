@@ -164,6 +164,7 @@ def main():
 
     except Exception as e:
         loggingR.error("ERRORE: %s", str(e))
+        print(e)
         GPIO.cleanup()
         sys.exit()
 
