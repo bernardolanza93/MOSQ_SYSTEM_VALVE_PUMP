@@ -104,7 +104,7 @@ def main():
 
 
             #TEST HOME
-            time.sleep(60)
+            time.sleep(10)
 
             now = datetime.now()
             hourstr = now.strftime("%Y-%m-%d %H:%M")
@@ -120,14 +120,18 @@ def main():
 
 
             # Apri la valvola
+            print("apertura valvola)")
             apri_valvola()
 
             # Aspetta fino a quando la valvola si apre completamente
             while not controlla_finecorsa():
                 time.sleep(0.1)
+            print("finecors raggiunto")
 
             # Aspetta 10 secondi per svuotare il serbatoio
             time.sleep(secondi_svuotamento)
+
+            print("svuot finito... chiusura valvola")
 
             # Chiudi la valvola
             chiudi_valvola()
@@ -135,6 +139,9 @@ def main():
             # Aspetta fino a quando la valvola si chiude completamente
             while controlla_finecorsa():
                 time.sleep(0.1)
+
+
+            print("CHIUSURA TOTSALE VLV, attivo pompa")
 
             # Attiva la pompa
             attiva_pompa()
