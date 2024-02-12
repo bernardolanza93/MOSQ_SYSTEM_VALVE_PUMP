@@ -19,7 +19,7 @@ pompa_pin = 22
 
 # secondi_settimana = 604800
 secondi_settimana = 604800
-secondi_svuotamento = 5
+secondi_svuotamento = 8
 secondi_pompaggio = 5
 
 
@@ -94,6 +94,9 @@ def main():
     try:
         while True:
 
+            print("inizializzo")
+            time.sleep(2)
+
             GPIO.setmode(GPIO.BCM)
             GPIO.setup(valvola_pin, GPIO.OUT)
             GPIO.setup(finecorsa_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -109,7 +112,7 @@ def main():
 
 
             #TEST HOME
-            time.sleep(10)
+
 
             now = datetime.now()
             hourstr = now.strftime("%Y-%m-%d %H:%M")
@@ -126,19 +129,21 @@ def main():
 
             # Apri la valvola
             print("apertura valvola)")
+            time.sleep(1)
             gira_valvola()
 
             # Aspetta fino a quando la valvola si apre completamente
             while not controlla_finecorsa():
                 time.sleep(0.3)
-            print("finecors raggiunto")
+            print("finecors raggiunto // STOP // VALVE OPEN")
 
             ferma_valvola()
 
             # Aspetta 10 secondi per svuotare il serbatoio
+            print("svuotamento")
             time.sleep(secondi_svuotamento)
 
-            print("svuot finito... chiusura valvola")
+            print("svuot finito... chiusura valvola....")
 
             # Chiudi la valvola
             gira_valvola()
@@ -148,9 +153,13 @@ def main():
                 time.sleep(0.3)
 
 
-            print("CHIUSURA TOTSALE VLV, attivo pompa")
+
+            print("STOP! CHIUSURA AVVENUTA, attivo pompa")
 
             ferma_valvola()
+
+            time .sleep(2)
+            print("pompaggio....")
 
 
             # Attiva la pompa
@@ -161,6 +170,8 @@ def main():
 
             # Disattiva la pompa
             disattiva_pompa()
+
+            print("pompa ferma")
 
             # Pulisci i GPIO alla fine del ciclo settimanale
             GPIO.cleanup()
