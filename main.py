@@ -53,11 +53,11 @@ except Exception as e:
 
 
 
-def apri_valvola():
+def gira_valvola():
     GPIO.output(valvola_pin, GPIO.HIGH)  # Accendi il motore della valvola
 
 
-def chiudi_valvola():
+def ferma_valvola():
     GPIO.output(valvola_pin, GPIO.LOW)  # Spegni il motore della valvola
 
 
@@ -126,12 +126,14 @@ def main():
 
             # Apri la valvola
             print("apertura valvola)")
-            apri_valvola()
+            gira_valvola()
 
             # Aspetta fino a quando la valvola si apre completamente
             while not controlla_finecorsa():
                 time.sleep(0.3)
             print("finecors raggiunto")
+
+            ferma_valvola()
 
             # Aspetta 10 secondi per svuotare il serbatoio
             time.sleep(secondi_svuotamento)
@@ -139,7 +141,7 @@ def main():
             print("svuot finito... chiusura valvola")
 
             # Chiudi la valvola
-            chiudi_valvola()
+            gira_valvola()
 
             # Aspetta fino a quando la valvola si chiude completamente
             while controlla_finecorsa():
@@ -147,6 +149,9 @@ def main():
 
 
             print("CHIUSURA TOTSALE VLV, attivo pompa")
+
+            ferma_valvola()
+
 
             # Attiva la pompa
             attiva_pompa()
