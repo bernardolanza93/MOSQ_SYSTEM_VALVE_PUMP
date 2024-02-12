@@ -17,6 +17,12 @@ pompa_pin = 22
 # Inizializzazione dei pin GPIO
 
 
+# secondi_settimana = 604800
+secondi_settimana = 604800
+secondi_svuotamento = 5
+secondi_pompaggio = 5
+
+
 # Specifica il percorso della cartella da controllare/creare
 folder_path = "data"
 if not os.path.exists(folder_path):
@@ -43,16 +49,8 @@ except Exception as e:
 
 
 
-# secondi_settimana = 604800
-secondi_settimana = 604800
-secondi_svuotamento = 10
-secondi_pompaggio = 20
 
-# Inizializzazione dei pin GPIO
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(valvola_pin, GPIO.OUT)
-GPIO.setup(finecorsa_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(pompa_pin, GPIO.OUT)
+
 
 
 def apri_valvola():
@@ -91,6 +89,12 @@ def calcola_tempo_rimanente():
 
 def main():
     cicli_eseguiti = 0
+    # Inizializzazione dei pin GPIO
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(valvola_pin, GPIO.OUT)
+    GPIO.setup(finecorsa_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(pompa_pin, GPIO.OUT)
+
     try:
         while True:
 
