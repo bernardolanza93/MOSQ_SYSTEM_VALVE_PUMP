@@ -134,7 +134,7 @@ def main():
 
             # Aspetta fino a quando la valvola si apre completamente
             while not controlla_finecorsa():
-                time.sleep(0.3)
+                time.sleep(0.1)
             print("finecors raggiunto // STOP // VALVE OPEN")
 
             ferma_valvola()
@@ -150,13 +150,15 @@ def main():
 
             # Aspetta fino a quando la valvola si chiude completamente
             while controlla_finecorsa():
-                time.sleep(0.3)
+                time.sleep(0.05)
+
+            ferma_valvola()
 
 
 
             print("STOP! CHIUSURA AVVENUTA, attivo pompa")
 
-            ferma_valvola()
+
 
             time .sleep(2)
             print("pompaggio....")
