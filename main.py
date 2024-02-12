@@ -12,7 +12,6 @@ from gpiozero import CPUTemperature
 # Definizione dei pin GPIO per la valvola e il finecorsa
 valvola_pin = 17
 finecorsa_pin = 18
-
 # Definizione dei pin GPIO per la pompa
 pompa_pin = 23
 # Inizializzazione dei pin GPIO
@@ -76,6 +75,7 @@ def chiudi_valvola():
 
 
 def controlla_finecorsa():
+    print("STATO PIN FINECORSA:", GPIO.input(finecorsa_pin) )
     return GPIO.input(finecorsa_pin)  # Restituisci lo stato del finecorsa
 
 
