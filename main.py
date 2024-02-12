@@ -11,14 +11,10 @@ from gpiozero import CPUTemperature
 
 # Definizione dei pin GPIO per la valvola e il finecorsa
 valvola_pin = 17
-finecorsa_pin = 18
+finecorsa_pin = 27
 # Definizione dei pin GPIO per la pompa
-pompa_pin = 23
+pompa_pin = 22
 # Inizializzazione dei pin GPIO
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(valvola_pin, GPIO.OUT)
-GPIO.setup(finecorsa_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(pompa_pin, GPIO.OUT)
 
 
 # Specifica il percorso della cartella da controllare/creare
@@ -46,13 +42,6 @@ except Exception as e:
     print("ERROR LOGGING: ", e)
 
 
-
-# Definizione dei pin GPIO per la valvola e il finecorsa
-valvola_pin = 17
-finecorsa_pin = 18
-
-# Definizione dei pin GPIO per la pompa
-pompa_pin = 23
 
 # secondi_settimana = 604800
 secondi_settimana = 604800
@@ -125,6 +114,8 @@ def main():
             cpu = CPUTemperature()
             loggingR.error("CPU_temp RPI: %s" % str(cpu.temperature))
 
+            print("inizio ciclo")
+
 
 
 
@@ -157,6 +148,7 @@ def main():
             # Pulisci i GPIO alla fine del ciclo settimanale
             GPIO.cleanup()
             loggingR.error("CYCLE TEMRINATED ")
+            print("fine ciclo")
 
     except Exception as e:
         loggingR.error("ERRORE: %s", str(e))
