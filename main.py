@@ -90,13 +90,14 @@ def calcola_tempo_rimanente():
 def main():
     cicli_eseguiti = 0
     # Inizializzazione dei pin GPIO
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(valvola_pin, GPIO.OUT)
-    GPIO.setup(finecorsa_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.setup(pompa_pin, GPIO.OUT)
 
     try:
         while True:
+
+            GPIO.setmode(GPIO.BCM)
+            GPIO.setup(valvola_pin, GPIO.OUT)
+            GPIO.setup(finecorsa_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+            GPIO.setup(pompa_pin, GPIO.OUT)
 
             #OGNI LUNDI______
 
@@ -129,7 +130,7 @@ def main():
 
             # Aspetta fino a quando la valvola si apre completamente
             while not controlla_finecorsa():
-                time.sleep(0.1)
+                time.sleep(0.3)
             print("finecors raggiunto")
 
             # Aspetta 10 secondi per svuotare il serbatoio
@@ -142,7 +143,7 @@ def main():
 
             # Aspetta fino a quando la valvola si chiude completamente
             while controlla_finecorsa():
-                time.sleep(0.1)
+                time.sleep(0.3)
 
 
             print("CHIUSURA TOTSALE VLV, attivo pompa")
